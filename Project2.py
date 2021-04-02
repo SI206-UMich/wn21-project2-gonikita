@@ -130,9 +130,10 @@ def write_csv(data, filename):
 
     with open(filename, 'w') as f:
         w_data = csv.writer(f, delimiter = ',')
-        w_data.writerow(['Book Title', 'Author Name'])
+        w_data.writerow(('Book Title','Author Name'))
         for line in data:
             w_data.writerow(line)
+    f.close()
     
 
 
@@ -232,12 +233,12 @@ class TestCases(unittest.TestCase):
         # check that there are 21 lines in the csv
         self.assertEqual(len(csv_lines), 21)
         # check that the header row is correct
-        self.assertEqual(csv_lines[0].strip(), 'Book Title, Author Name')
+        self.assertEqual(csv_lines[0], 'Book Title,Author Name')
         # check that the next row is 'Harry Potter and the Deathly Hallows (Harry Potter, #7)', 'J.K. Rowling'
-        self.assertEqual(csv_lines[1].strip(), 'Harry Potter and the Deathly Hallows (Harry Potter, #7)', 'J.K. Rowling')
+        self.assertEqual(csv_lines[1], 'Harry Potter and the Deathly Hallows (Harry Potter, #7), J.K. Rowling')
         # check that the last row is 'Harry Potter: The Prequel (Harry Potter, #0.5)', 'J.K. Rowling'
-        self.assertEqual(csv_lines[-1].strip(), 'Harry Potter: The Prequel (Harry Potter, #0.5)', 'J.K. Rowling')
-
+        self.assertEqual(csv_lines[-1], 'Harry Potter: The Prequel (Harry Potter, #0.5), J.K. Rowling')
+        
 
 if __name__ == '__main__':
     print(extra_credit("extra_credit.htm"))
